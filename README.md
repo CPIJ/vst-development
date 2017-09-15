@@ -1,7 +1,7 @@
 # VST Development 
 In this repository you will find my explorations in VST development. At the moment of writing I followed an open course at school in wich I was allowed to explore any topic. Being an avid electronic music producer I ofcourse choose to make my own plugins!
 
-I have ... kinds of projects in this repository:
+I have 3 kinds of projects in this repository:
 1. Exploration -> Trying out different techniques and testing them.
 2. Prototype -> Testing stuff I want to use in the Final projects.
 3. Final -> Fully fledged VST plug-Ins.
