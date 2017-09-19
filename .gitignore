@@ -20,7 +20,7 @@
 # Compiled Dynamic libraries
 *.so
 *.dylib
-
+*.dll
 
 # Fortran module files
 *.mod
@@ -325,3 +325,5 @@ __pycache__/
 *.btm.cs
 *.odx.cs
 *.xsd.cs
+
+!Releases/
