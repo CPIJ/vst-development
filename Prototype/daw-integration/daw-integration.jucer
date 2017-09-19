@@ -14,6 +14,11 @@
               jucerVersion="5.1.1" companyName="CPG">
   <MAINGROUP id="xT58N0" name="DawIntegration">
     <GROUP id="{F962C364-97DB-A50F-DA2D-F979E54FD22D}" name="Source">
+      <GROUP id="{C22EA8B5-9E96-AF92-44C6-1C0B4338D720}" name="Generator">
+        <FILE id="HKgDba" name="SineGenerator.cpp" compile="1" resource="0"
+              file="Source/SineGenerator.cpp"/>
+        <FILE id="kqZ74g" name="SineGenerator.h" compile="0" resource="0" file="Source/SineGenerator.h"/>
+      </GROUP>
       <FILE id="g5byQs" name="PluginProcessor.cpp" compile="1" resource="0"
             file="Source/PluginProcessor.cpp"/>
       <FILE id="ycM75Q" name="PluginProcessor.h" compile="0" resource="0"
