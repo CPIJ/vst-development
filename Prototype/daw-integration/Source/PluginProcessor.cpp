@@ -30,6 +30,7 @@ DawIntegrationAudioProcessor::DawIntegrationAudioProcessor()
 
 DawIntegrationAudioProcessor::~DawIntegrationAudioProcessor()
 {
+	delete sineGenerator;
 }
 
 //==============================================================================
@@ -121,19 +122,33 @@ bool DawIntegrationAudioProcessor::isBusesLayoutSupported(const BusesLayout& lay
 #endif
 }
 #endif
-
 void DawIntegrationAudioProcessor::processBlock(AudioSampleBuffer& buffer, MidiBuffer& midiMessages)
 {
-	const float level = 0.125f;
-	float* const bufferLeft = buffer.getWritePointer(0, buffer.getSample(0, 0));
-	float* const bufferRight = buffer.getWritePointer(1, buffer.getSample(1, 0));
+	MidiMessage m;
+	MidiBuffer	processedMidi;
+	int			time = 0;
 
-	for (int sample = 0; sample < buffer.getNumSamples(); ++sample)
+
+	for (MidiBuffer::Iterator i(midiMessages); i.getNextEvent(m, time);)
 	{
-		const float currentSample = std::sin(sineGenerator->currentAngle);
-		sineGenerator->currentAngle += sineGenerator->angleDelta;
-		bufferLeft[sample] = currentSample * level;
-		bufferRight[sample] = currentSample * level;
+		if (m.isNoteOn()) sineGenerator->isPlaying = true;
+		else if (m.isNoteOff()) sineGenerator->isPlaying = false;
+	}
+
+	if (sineGenerator->isPlaying)
+	{
+		const	float	level = 0.125f;
+		float*	const	bufferLeft = buffer.getWritePointer(0, buffer.getSample(0, time));
+		float*	const	bufferRight = buffer.getWritePointer(1, buffer.getSample(1, time));
+
+		for (int sample = 0; sample < buffer.getNumSamples(); ++sample)
+		{
+			const float currentSample = sin(sineGenerator->currentAngle);
+			sineGenerator->currentAngle += sineGenerator->angleDelta;
+			bufferLeft[sample] = currentSample * level;
+			bufferRight[sample] = currentSample * level;
+
+		}
 	}
 }
 

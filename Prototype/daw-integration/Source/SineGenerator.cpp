@@ -4,9 +4,11 @@
 
 SineGenerator::SineGenerator()
 {
-	this->angleDelta = 0;
-	this->currentAngle = 0;
-	this->currentSampleRate = 0;
+	angleDelta = 0;
+	currentAngle = 0;
+	currentSampleRate = 0;
+
+	isPlaying = false;
 }
 
 void SineGenerator::updateAngleDelta()

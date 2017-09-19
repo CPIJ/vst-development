@@ -10,4 +10,6 @@ public:
 	double currentSampleRate;
 	double currentAngle;
 	double angleDelta;
+
+	bool isPlaying;
 };
