@@ -90,7 +90,6 @@ void DawIntegrationAudioProcessor::changeProgramName(int index, const String& ne
 void DawIntegrationAudioProcessor::prepareToPlay(double sampleRate, int samplesPerBlock)
 {
 	sineGenerator->setSampleRate(sampleRate);
-	sineGenerator->updateAngleDelta();
 }
 
 void DawIntegrationAudioProcessor::releaseResources()
@@ -128,11 +127,19 @@ void DawIntegrationAudioProcessor::processBlock(AudioSampleBuffer& buffer, MidiB
 	MidiBuffer	processedMidi;
 	int			time = 0;
 
-
 	for (MidiBuffer::Iterator i(midiMessages); i.getNextEvent(m, time);)
 	{
-		if (m.isNoteOn()) sineGenerator->isPlaying = true;
-		else if (m.isNoteOff()) sineGenerator->isPlaying = false;
+		if (m.isNoteOn()) 
+		{
+			sineGenerator->isPlaying = true;
+			
+			sineGenerator->setFrequency(m.getMidiNoteInHertz(m.getNoteNumber()));
+			sineGenerator->updateAngleDelta();
+		}
+		else if (m.isNoteOff()) 
+		{
+			sineGenerator->isPlaying = false;
+		}
 	}
 
 	if (sineGenerator->isPlaying)
@@ -143,7 +150,7 @@ void DawIntegrationAudioProcessor::processBlock(AudioSampleBuffer& buffer, MidiB
 
 		for (int sample = 0; sample < buffer.getNumSamples(); ++sample)
 		{
-			const float currentSample = sin(sineGenerator->currentAngle);
+			const float currentSample = std::sin(sineGenerator->currentAngle);
 			sineGenerator->currentAngle += sineGenerator->angleDelta;
 			bufferLeft[sample] = currentSample * level;
 			bufferRight[sample] = currentSample * level;
