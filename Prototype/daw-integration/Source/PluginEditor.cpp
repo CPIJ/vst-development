@@ -1,9 +1,9 @@
 /*
   ==============================================================================
 
-    This file was auto-generated!
+	This file was auto-generated!
 
-    It contains the basic framework code for a JUCE plugin editor.
+	It contains the basic framework code for a JUCE plugin editor.
 
   ==============================================================================
 */
@@ -13,12 +13,12 @@
 
 
 //==============================================================================
-DawIntegrationAudioProcessorEditor::DawIntegrationAudioProcessorEditor (DawIntegrationAudioProcessor& p)
-    : AudioProcessorEditor (&p), processor (p)
+DawIntegrationAudioProcessorEditor::DawIntegrationAudioProcessorEditor(DawIntegrationAudioProcessor& p)
+	: AudioProcessorEditor(&p), processor(p)
 {
-    // Make sure that before the constructor has finished, you've set the
-    // editor's size to whatever you need it to be.
-    setSize (400, 300);
+	// Make sure that before the constructor has finished, you've set the
+	// editor's size to whatever you need it to be.
+	setSize(400, 300);
 }
 
 DawIntegrationAudioProcessorEditor::~DawIntegrationAudioProcessorEditor()
@@ -26,18 +26,18 @@ DawIntegrationAudioProcessorEditor::~DawIntegrationAudioProcessorEditor()
 }
 
 //==============================================================================
-void DawIntegrationAudioProcessorEditor::paint (Graphics& g)
+void DawIntegrationAudioProcessorEditor::paint(Graphics& g)
 {
-    // (Our component is opaque, so we must completely fill the background with a solid colour)
-    g.fillAll (getLookAndFeel().findColour (ResizableWindow::backgroundColourId));
+	// (Our component is opaque, so we must completely fill the background with a solid colour)
+	g.fillAll(getLookAndFeel().findColour(ResizableWindow::backgroundColourId));
 
-    g.setColour (Colours::white);
-    g.setFont (15.0f);
-    g.drawFittedText ("Hello World!", getLocalBounds(), Justification::centred, 1);
+	g.setColour(Colours::white);
+	g.setFont(15.0f);
+	g.drawFittedText("DAW Integration", getLocalBounds(), Justification::centred, 1);
 }
 
 void DawIntegrationAudioProcessorEditor::resized()
 {
-    // This is generally where you'll want to lay out the positions of any
-    // subcomponents in your editor..
+	// This is generally where you'll want to lay out the positions of any
+	// subcomponents in your editor..
 }
