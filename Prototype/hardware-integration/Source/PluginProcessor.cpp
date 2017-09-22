@@ -123,26 +123,17 @@ bool HardwareIntegrationAudioProcessor::isBusesLayoutSupported (const BusesLayou
 
 void HardwareIntegrationAudioProcessor::processBlock (AudioSampleBuffer& buffer, MidiBuffer& midiMessages)
 {
-    const int totalNumInputChannels  = getTotalNumInputChannels();
-    const int totalNumOutputChannels = getTotalNumOutputChannels();
+	const int channels = buffer.getNumChannels();
 
-    // In case we have more outputs than inputs, this code clears any output
-    // channels that didn't contain input data, (because these aren't
-    // guaranteed to be empty - they may contain garbage).
-    // This is here to avoid people getting screaming feedback
-    // when they first compile a plugin, but obviously you don't need to keep
-    // this code if your algorithm always overwrites all the output channels.
-    for (int i = totalNumInputChannels; i < totalNumOutputChannels; ++i)
-        buffer.clear (i, 0, buffer.getNumSamples());
+	for (int channel = 0; channel < channels; ++channel) {
 
-    // This is the place where you'd normally do the guts of your plugin's
-    // audio processing...
-    for (int channel = 0; channel < totalNumInputChannels; ++channel)
-    {
-        float* channelData = buffer.getWritePointer (channel);
+		float* const currentBuffer = buffer.getWritePointer(channel, buffer.getSample(channel, 0));
 
-        // ..do something to the data...
-    }
+		for (int sample = 0; sample < buffer.getNumSamples(); ++sample)
+		{
+			currentBuffer[sample] = random.nextFloat() * 0.25f - 1.25f;
+		}
+	}
 }
 
 //==============================================================================
