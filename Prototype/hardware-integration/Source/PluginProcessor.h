@@ -11,6 +11,7 @@
 #pragma once
 
 #include "../JuceLibraryCode/JuceHeader.h"
+#include "LeapMotionController.h"
 
 
 //==============================================================================
@@ -59,4 +60,5 @@ private:
 	//==============================================================================
 	JUCE_DECLARE_NON_COPYABLE_WITH_LEAK_DETECTOR(HardwareIntegrationAudioProcessor);
 	Random random;
+	LeapMotionController* controller;
 };

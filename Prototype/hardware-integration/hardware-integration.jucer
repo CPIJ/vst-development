@@ -14,6 +14,12 @@
               jucerVersion="5.1.1" companyName="CPG">
   <MAINGROUP id="xT58N0" name="HardwareIntegration">
     <GROUP id="{F962C364-97DB-A50F-DA2D-F979E54FD22D}" name="Source">
+      <GROUP id="{DCED4F21-C162-FBC1-78F5-C846F1F60B61}" name="Controllers">
+        <FILE id="I4iDrD" name="LeapMotionController.cpp" compile="1" resource="0"
+              file="Source/LeapMotionController.cpp"/>
+        <FILE id="OdoNfu" name="LeapMotionController.h" compile="0" resource="0"
+              file="Source/LeapMotionController.h"/>
+      </GROUP>
       <FILE id="g5byQs" name="PluginProcessor.cpp" compile="1" resource="0"
             file="Source/PluginProcessor.cpp"/>
       <FILE id="ycM75Q" name="PluginProcessor.h" compile="0" resource="0"
@@ -27,7 +33,9 @@
     <VS2017 targetFolder="Builds/VisualStudio2017">
       <CONFIGURATIONS>
         <CONFIGURATION name="Debug" winWarningLevel="4" generateManifest="1" winArchitecture="x64"
-                       isDebug="1" optimisation="1" targetName="HardwareIntegration"/>
+                       isDebug="1" optimisation="1" targetName="HardwareIntegration"
+                       libraryPath="$(LEAP_SDK)\lib\x64" postbuildCommand="xcopy /yr &quot;$(LEAP_SDK)\lib\x64\Leap.dll&quot; &quot;$(TargetDir)&quot;"
+                       headerPath="$(LEAP_SDK)\include"/>
         <CONFIGURATION name="Release" winWarningLevel="4" generateManifest="1" winArchitecture="x64"
                        isDebug="0" optimisation="3" targetName="HardwareIntegration"
                        binaryPath="D:\Documents\VST Development\VST Plugins\CPG\Prototype\$(SolutionName)"/>
