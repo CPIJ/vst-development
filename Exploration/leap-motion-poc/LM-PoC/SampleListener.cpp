@@ -1,7 +1,6 @@
 ﻿#include "stdafx.h"
 #include "SampleListener.h"
 #include <Leap.h>
-#include "StringBuilder.h"
 
 void SampleListener::onConnect(const Leap::Controller&)
 {

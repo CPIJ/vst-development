@@ -2,11 +2,19 @@
 #include <iostream>
 #include "Leap.h"
 #include "SampleListener.h";
+#include <cstdlib>
+
+Leap::Controller controller;
+SampleListener listener;
+
+void exiting()
+{
+	controller.removeListener(listener);
+}
 
 int main(int argc, char** argv) {
 
-	SampleListener listener;
-	Leap::Controller controller;
+	atexit(exiting);
 
 	controller.addListener(listener);
 
@@ -18,4 +26,6 @@ int main(int argc, char** argv) {
 
 	return 0;
 }
+
+
 
