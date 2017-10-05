@@ -1,9 +1,9 @@
 /*
   ==============================================================================
 
-    This file was auto-generated!
+	This file was auto-generated!
 
-    It contains the basic framework code for a JUCE plugin editor.
+	It contains the basic framework code for a JUCE plugin editor.
 
   ==============================================================================
 */
@@ -17,19 +17,27 @@
 //==============================================================================
 /**
 */
-class VstPluginAudioProcessorEditor  : public AudioProcessorEditor
+class VstPluginAudioProcessorEditor : public AudioProcessorEditor, public Button::Listener
 {
 public:
-    VstPluginAudioProcessorEditor (VstPluginAudioProcessor&);
-    ~VstPluginAudioProcessorEditor();
+	VstPluginAudioProcessorEditor(VstPluginAudioProcessor&);
+	~VstPluginAudioProcessorEditor();
 
-    //==============================================================================
-    void paint (Graphics&) override;
-    void resized() override;
+	//==============================================================================
+	void paint(Graphics&) override;
+	void resized() override;
+	void buttonClicked(Button*) override;
 
 private:
-    // This reference is provided as a quick way for your editor to
-    // access the processor object that created it.
-    VstPluginAudioProcessor& processor;
-    JUCE_DECLARE_NON_COPYABLE_WITH_LEAK_DETECTOR (VstPluginAudioProcessorEditor)
+	void initializeComponents();
+
+	VstPluginAudioProcessor& processor;
+
+	Slider volumeSlider;
+
+	ToggleButton sineButton;
+	ToggleButton sawButton;
+	ToggleButton squareButton;
+
+	JUCE_DECLARE_NON_COPYABLE_WITH_LEAK_DETECTOR(VstPluginAudioProcessorEditor)
 };
