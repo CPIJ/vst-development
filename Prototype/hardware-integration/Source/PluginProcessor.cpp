@@ -30,7 +30,14 @@ HardwareIntegrationAudioProcessor::HardwareIntegrationAudioProcessor()
 
 HardwareIntegrationAudioProcessor::~HardwareIntegrationAudioProcessor()
 {
-	delete this->controller;
+	try
+	{
+		delete this->controller;
+	}
+	catch (int e)
+	{
+		// Yeah this is bad, i know..
+	}
 }
 
 //==============================================================================
@@ -132,7 +139,7 @@ void HardwareIntegrationAudioProcessor::processBlock(AudioSampleBuffer& buffer, 
 
 		for (int sample = 0; sample < buffer.getNumSamples(); ++sample)
 		{
-			if (this->controller->isPlaying) 
+			if (this->controller->isPlaying)
 			{
 				currentBuffer[sample] = random.nextFloat() * 0.25f - 1.25f;
 			}

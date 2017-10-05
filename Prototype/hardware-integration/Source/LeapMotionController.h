@@ -1,7 +1,7 @@
 #pragma once
 #include "Leap.h"
 
-class LeapMotionController : public Leap::Listener
+class LeapMotionController : private Leap::Listener
 {
 	void onConnect(const Leap::Controller&) override;
 	void onFrame(const Leap::Controller&) override;
