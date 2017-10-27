@@ -1,12 +1,15 @@
 ﻿#pragma once
+#include "Generator.h"
 
-class SineGenerator
+class SineGenerator : public Generator
 {
 public:
 	SineGenerator();
-	void updateAngleDelta();
-	void setSampleRate(double sampleRate);
-	void setFrequency(double freq);
+
+	void update() override;
+	void fillBuffer(float* buffer, int sample) override;
+	void setSampleRate(double sampleRate) override;
+	void setFrequency(double freq) override;
 
 	double currentAngle;
 	double angleDelta;

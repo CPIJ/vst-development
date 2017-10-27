@@ -25,12 +25,12 @@ VstPluginAudioProcessor::VstPluginAudioProcessor()
 	)
 #endif
 {
-	sineGenerator = new SineGenerator();
+	generator = new SineGenerator();
 }
 
 VstPluginAudioProcessor::~VstPluginAudioProcessor()
 {
-	delete sineGenerator;
+	delete generator;
 }
 
 //==============================================================================
@@ -89,7 +89,7 @@ void VstPluginAudioProcessor::changeProgramName(int index, const String& newName
 //==============================================================================
 void VstPluginAudioProcessor::prepareToPlay(double sampleRate, int samplesPerBlock)
 {
-	sineGenerator->setSampleRate(sampleRate);
+	generator->setSampleRate(sampleRate);
 }
 
 void VstPluginAudioProcessor::releaseResources()
@@ -131,30 +131,26 @@ void VstPluginAudioProcessor::processBlock(AudioSampleBuffer& buffer, MidiBuffer
 	{
 		if (m.isNoteOn()) 
 		{
-			sineGenerator->isPlaying = true;
+			generator->isPlaying = true;
 			
-			sineGenerator->setFrequency(m.getMidiNoteInHertz(m.getNoteNumber()));
-			sineGenerator->updateAngleDelta();
+			generator->setFrequency(m.getMidiNoteInHertz(m.getNoteNumber()));
+			generator->update();
 		}
 		else if (m.isNoteOff()) 
 		{
-			sineGenerator->isPlaying = false;
+			generator->isPlaying = false;
 		}
 	}
 
-	if (sineGenerator->isPlaying)
+	if (generator->isPlaying)
 	{
-		const	float	level = 0.125f;
 		float*	const	bufferLeft = buffer.getWritePointer(0, buffer.getSample(0, time));
 		float*	const	bufferRight = buffer.getWritePointer(1, buffer.getSample(1, time));
 
 		for (int sample = 0; sample < buffer.getNumSamples(); ++sample)
 		{
-			const float currentSample = std::sin(sineGenerator->currentAngle);
-			sineGenerator->currentAngle += sineGenerator->angleDelta;
-			bufferLeft[sample] = currentSample * level;
-			bufferRight[sample] = currentSample * level;
-
+			generator->fillBuffer(bufferLeft, sample);
+			generator->fillBuffer(bufferRight, sample);
 		}
 	}
 }

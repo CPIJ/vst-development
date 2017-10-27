@@ -11,6 +11,7 @@
 #include "PluginProcessor.h"
 #include "PluginEditor.h"
 #include <list>
+#include "Generators.h"
 
 #define MARGIN 30
 #define ROW 30
@@ -55,9 +56,20 @@ void VstPluginAudioProcessorEditor::buttonClicked(Button* button)
 {
 	if (button == &sineButton)
 	{
-		processor.sineGenerator = new SineGenerator();
+		processor.generator = Generators::sine();
 	}
-	// add other generators...
+	else if (button == &sawButton)
+	{
+		processor.generator = Generators::sine();
+	}
+	else if (button == &squareButton)
+	{
+		processor.generator = Generators::sine();
+	}
+	else
+	{
+		throw std::invalid_argument("No button of this type exists.");
+	}
 }
 
 #pragma region Initialize
