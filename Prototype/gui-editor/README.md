@@ -22,3 +22,7 @@ In this prototype I created a new audio plugin and changed the default GUI to a 
 17. Cleanup! remove the old GUI files, wich are now unused.
 
 That's it, you are now ready to start using JUCE's GUI Editor in combination with an Audio Plug-In!
+
+## Tutorials
+If you want a more in-depth look as of how to create GUI projects and design GUI's I have made two tutorials.
+You can find these tutorials in the `Tutorial` folder!
